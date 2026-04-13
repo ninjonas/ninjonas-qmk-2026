@@ -1,16 +1,18 @@
 # ninjonas Keymap for [Kyria rev1](https://github.com/splitkb/kyria)
 
-This keymap lives in the `ninjonas-qmk-2026` External Userspace repo, so it compiles against QMK without touching the main `qmk_firmware` fork. That means cleaner diffs, easier updates, and all shared logic (macros, tap dances, combos) lives in `users/ninjonas/` instead of being copy-pasted per-keyboard.
+This keymap lives in the `ninjonas-qmk-2026` External Userspace repo, so it compiles against QMK without touching the main `qmk_firmware` fork. Cleaner diffs, easier updates, and all shared logic (macros, tap dances, combos) lives in `users/ninjonas/` instead of being copy-pasted per-keyboard.
 
 More info about the Kyria: [Introducing the Kyria](https://blog.splitkb.com/blog/introducing-the-kyria)
 
 Custom macros and tap dances are documented in the [userspace README](../../../../users/ninjonas/README.md).
 
+The keymap is built in stages. Each stage is functional on its own. Flash after Stage 1, add more when you're ready.
+
 ---
 
-## Keymap
+## Stage 1: Core Typing
 
-This layout is built around my actual typing habits and changes when those habits do. QWERTY is the only active base layer right now. DVORAK and COLEMAK are defined but commented out in Stage 1 and will be re-enabled in Stage 4.
+**Goal:** Flash a working keyboard with everything needed for daily typing. QWERTY only, encoders, OLED, and one net-new macro.
 
 ### QWERTY
 
@@ -22,30 +24,11 @@ This layout is built around my actual typing habits and changes when those habit
 |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
 | LShift |   Z  |   X  |   C  |   V  |   B  |      | LAlt |  |T_CPAP|      |   N  |   M  |  , < |  . > |  / ? | =/RSft|
 `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-                       | LAlt |T_GUI | LCtl |LT_RAI| T_LBRC|  |T_RBRC| LT_LOW|BkSp | Del  | Mute |
+                       | LAlt |T_GUI | LCtl |LT_RAI|T_LBRC|  |T_RBRC|LT_LOW| BkSp | Del  | Mute |
                        `----------------------------------'  `----------------------------------'
 ```
 
-**Tap dance keys:**
-- `Tab/CTL` — tap: Tab, double tap: Ctrl+Tab
-- `Esc/CAP` — tap: Esc, double tap: Caps Lock
-- `T_GUI` — tap: Cmd, double tap: Cmd+Space
-- `T_CPAP` — tap: Cmd+V (paste), hold: Cmd+C (copy), double tap: opens Line app, triple tap: KC_MPLY (play/pause)
-- `Y/NP` — tap: Y, double tap: toggle NUMPAD layer
-- `T_LBRC` — tap: `[`, double tap: Cmd+`[` (browser back)
-- `T_RBRC` — tap: `]`, double tap: Cmd+`]` (browser forward)
-
----
-
-### DVORAK
-
-Coming in Stage 4. The layer is defined in `ninjonas.h` but commented out in `keymap.c`.
-
-### COLEMAK
-
-Coming in Stage 4. Same situation as DVORAK.
-
----
+> **Note:** `Tab/CTL`, `Esc/CAP`, `T_GUI`, `T_CPAP`, `Y/NP`, `T_LBRC`, and `T_RBRC` are tap dance keys. Full tap dance definitions land in Stage 2 and Stage 3. In Stage 1 these keys use basic double-tap definitions or are mapped to their primary action only.
 
 ### LOWER
 
@@ -53,23 +36,19 @@ Activated by holding `LT_LOW` (right thumb, inner).
 
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
-|        |      |      | Bri+ | Play | Mute |  Scn |                        | PgUp | Home |  Up  |  End |      |  —   |
+|        |      |      | Bri+ | Play | Mute |                              | PgUp | Home |  Up  |  End |      |      |
 |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-|        |      |      | Bri- | FFwd | Vol+ |      |                        | PgDn | Left | Down | Rght | Lock |       |
+|        |      |      | Bri- | FFwd | Vol+ |                              | PgDn | Left | Down | Rght | Lock |       |
 |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-| LShift | M_SHFT|     | Rwnd | Vol- |      | T_LBRC|      |  |      | T_RBRC|  M  | Term | Code |      |      |
+| LShift |M_SHFT|      | Rwnd | Vol- |      |      |      |  |      |      |   N  | Term | Code |      |      |       |
 `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
                        |      |      |      |      |      |  |      |      |      |      |      |
                        `----------------------------------'  `----------------------------------'
 ```
 
-`M_SHFT` sends Cmd+Ctrl+Left / Cmd+Ctrl+Right for macOS Sequoia native window tiling. See the [userspace README](../../../../users/ninjonas/README.md) for the full macro list.
-
----
-
 ### RAISE
 
-Activated by holding `LT_RAI` (right thumb, middle position while on left half).
+Activated by holding `LT_RAI` (right thumb, middle).
 
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
@@ -83,9 +62,7 @@ Activated by holding `LT_RAI` (right thumb, middle position while on left half).
                        `----------------------------------'  `----------------------------------'
 ```
 
-`K_CPRF` = Cmd+Shift+M — switches Google Chrome profiles.
-
----
+`K_CPRF` = Cmd+Shift+M (switch Google Chrome profiles).
 
 ### ADJUST
 
@@ -95,7 +72,7 @@ Activated by holding both `LT_LOW` and `LT_RAI` simultaneously.
 ,-------------------------------------------.                              ,-------------------------------------------.
 | M_MAKE |EEP RST|     |      |      |      |                              |UG_TOG|      |      |COLEMAK|DVORAK|QWERTY|
 |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-| M_VRSN | M_MALL|UG_SPD+|UG_SAT+|UG_HUE+|UG_VAL+|                       |      |      |      |      |      |       |
+| M_VRSN |M_MALL |UG_SPD+|UG_SAT+|UG_HUE+|UG_VAL+|                       |      |      |      |      |      |       |
 |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
 | M_FLSH |      |UG_SPD-|UG_SAT-|UG_HUE-|UG_VAL-|      |      |  |      |      |UG_NXT|      |      |      |      |
 `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -105,11 +82,9 @@ Activated by holding both `LT_LOW` and `LT_RAI` simultaneously.
 
 RGB keycodes use the modern `UG_*` prefix (unified lighting API, QMK 0.22+). `QK_CLEAR_EEPROM` resets persistent settings without a physical button press.
 
----
-
 ### NUMPAD
 
-Activated by double-tapping `Y/NP`.
+Activated by double-tapping `Y/NP` (tap dance, restored in Stage 3).
 
 ```
 ,-------------------------------------------.                              ,-------------------------------------------.
@@ -124,6 +99,126 @@ Activated by double-tapping `Y/NP`.
 ```
 
 Double-tap `Y/NP` again to return to QWERTY.
+
+### Encoders (Stage 1)
+
+| Layer  | Left encoder         | Right encoder         |
+|--------|----------------------|-----------------------|
+| QWERTY | Brightness down/up   | Volume down/up        |
+| LOWER  | App switcher (Cmd+Tab) | Scroll up/down      |
+| RAISE  | Page up/down         | Tab switcher (Ctrl+Tab) |
+| ADJUST | RGB hue              | RGB brightness        |
+| NUMPAD | (no action)          | (no action)           |
+
+### OLED (Stage 1)
+
+- Master side: full status display (layer, mods, lock state)
+- Secondary side: custom logo scroll
+- Auto-off after 15 seconds (`OLED_TIMEOUT 15000`)
+
+### Macros (Stage 1)
+
+| Key    | Action |
+|--------|--------|
+| M_EMJI | Opens macOS emoji picker (Cmd+Ctrl+Space). Net-new key, not in the old build. |
+
+---
+
+## Stage 2: Quality of Life
+
+**Goal:** The daily-driver extras that make the board feel like home. Combos, essential macros, and the most-used tap dances.
+
+### Combos (new in Stage 2)
+
+| Combo | Keys | Action |
+|-------|------|--------|
+| EQ_QUIT  | E + Q | Cmd+Q (quit app) |
+| RW_CLOSE | R + W | Cmd+W (close tab) |
+| QT_TAB   | Q + T | Cmd+T (new tab)   |
+| ZC_COPY  | Z + C | Cmd+C (copy)      |
+| XV_PASTE | X + V | Cmd+V (paste)     |
+
+Combo term: 60ms.
+
+### Tap dances (new in Stage 2)
+
+| Key    | Tap        | Double tap                        |
+|--------|------------|-----------------------------------|
+| T_CPAP | Cmd+V (paste) | Hold: Cmd+C (copy), double tap: opens Line app, triple tap: KC_MPLY (play/pause) |
+| T_LBRC | `[`        | Cmd+`[` (browser back)            |
+| T_RBRC | `]`        | Cmd+`]` (browser forward)         |
+
+### Macros (new in Stage 2)
+
+| Key    | Action |
+|--------|--------|
+| M_SHFT | macOS Sequoia native window tiling (Cmd+Ctrl+Left / Cmd+Ctrl+Right). Replaces old ShiftIt triple-mod combo. |
+
+> `M_PYNV` is removed in Stage 2 and not coming back.
+
+---
+
+## Stage 3: Full Feature Parity
+
+**Goal:** Everything the old keymap did, fully restored and updated.
+
+### Tap dances (new in Stage 3)
+
+| Key    | Tap        | Double tap              |
+|--------|------------|-------------------------|
+| T_TAB  | Tab        | Ctrl+Tab                |
+| T_ESC  | Esc        | Caps Lock               |
+| T_GRV  | `` ` ``    | Cmd+`` ` ``             |
+| T_GUI  | Cmd        | Cmd+Space (Spotlight)   |
+| T_Y    | Y          | Toggle NUMPAD layer     |
+
+### RGB (new in Stage 3)
+
+RGB re-enabled via `RGBLIGHT_ENABLE = yes`. Controls live on the ADJUST layer (already wired in Stage 1 with `UG_*` keycodes). Encoder on ADJUST maps left to hue and right to brightness.
+
+### Macros (new in Stage 3)
+
+| Key    | Action |
+|--------|--------|
+| M_CODE | `code .\n` to open VS Code in current directory |
+| M_TERM | Spotlight then "terminal" (250ms delay) |
+| M_MAKE | `qmk compile -kb splitkb/kyria/rev1 -km ninjonas` |
+| M_FLSH | Flash command for External Userspace |
+| M_MALL | Compile Kyria + crkbd in one shot |
+| M_VRSN | Print QMK version info |
+| M_XXX1-5 | Secret macros via optional `secrets.c` |
+
+---
+
+## Stage 4: Expansion
+
+**Goal:** New features and additional hardware support.
+
+### Alternate base layers (new in Stage 4)
+
+Dvorak and Colemak are defined in `ninjonas.h` but commented out in `keymap.c` during Stages 1-3. Stage 4 uncomments them and wires the ADJUST layer switcher keys (already present as `DVORAK` and `COLEMAK` in the ADJUST layout above).
+
+| Key on ADJUST | Action |
+|---------------|--------|
+| QWERTY | Switch to QWERTY base layer |
+| DVORAK | Switch to DVORAK base layer |
+| COLEMAK | Switch to COLEMAK base layer |
+
+Combo definitions will also be updated to use physical positions instead of QWERTY keycodes so they work correctly on all base layers.
+
+### crkbd support (new in Stage 4)
+
+- New keymap at `keyboards/crkbd/rev1/keymaps/ninjonas/`
+- QWERTY, Dvorak, Colemak layers ported across
+- `M_MALL` updated to include crkbd compilation
+
+### New QMK features (Stage 4)
+
+| Feature | Notes |
+|---------|-------|
+| Caps Word (`CW_TOGG`) | Bind to a key (TBD) |
+| Repeat Key (`QK_REP`) | Bind to a key (TBD) |
+| WPM display | `WPM_ENABLE = yes`, call `get_current_wpm()` in `render_status()` |
 
 ---
 
