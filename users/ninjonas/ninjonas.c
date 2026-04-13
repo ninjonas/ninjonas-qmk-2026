@@ -15,8 +15,12 @@
  */
 #include "ninjonas.h"
 
-// layer_state_set_user removed: tri-layer now handled by TRI_LAYER_ENABLE built-in
-// Configure via TRI_LAYER_LOWER, TRI_LAYER_UPPER, TRI_LAYER_ADJUST in config.h
+// layer_state_set_user: manually drives tri-layer logic because LT() keys
+// don't emit QK_TRI_LAYER_LOWER/UPPER, so TRI_LAYER_ENABLE alone won't fire.
+// update_tri_layer_state activates _ADJUST whenever both _LOWER and _RAISE are on.
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
 
 #ifdef RGBLIGHT_ENABLE
 extern rgblight_config_t rgblight_config;

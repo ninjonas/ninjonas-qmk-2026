@@ -98,7 +98,7 @@ uint16_t encoder_rotated_timer;
 #define _____________________LOWER_R2_______________________ _______________NAV_2______________, K_LOCK, XXXXXXX
 #define _____________________LOWER_R3_______________________ T_RBRC, KC_M, M_TERM, M_CODE, M_XXX1, M_PYNV
 
-#define _____________________ADJUST_L1______________________ M_MAKE, QK_CLEAR_EEPROM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define _____________________ADJUST_L1______________________ M_MAKE, EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #if defined(RGB_MATRIX_ENABLE) || defined(RGBLIGHT_ENABLE)
   #define _____________________ADJUST_L2______________________ M_VRSN, M_MALL, UG_SPDU, UG_SATU, UG_HUEU, UG_VALU
@@ -115,7 +115,7 @@ uint16_t encoder_rotated_timer;
   #define _____________________ADJUST_R1______________________ XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK,  DVORAK, QWERTY
   #define _____________________ADJUST_R3______________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #endif
-#define _____________________ADJUST_R2______________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define _____________________ADJUST_R2______________________ M_EMJI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define _____________________NUMPAD_1_______________________ T_Y, KC_P7, KC_P8, KC_P9, KC_PPLS, KC_PAST
 #define _____________________NUMPAD_2_______________________ XXXXXXX, KC_P4, KC_P5, KC_P6, KC_PMNS, KC_PSLS
@@ -136,7 +136,7 @@ uint16_t encoder_rotated_timer;
 #define _________MEDIA_2_________ KC_BRID, KC_MFFD, KC_VOLU
 #define _________MEDIA_3_________ XXXXXXX, KC_MRWD, KC_VOLD
 
-#if defined(KEYBOARD_crkbd_rev1) || defined(KEYBOARD_kyria_rev1)
+#if defined(KEYBOARD_crkbd_rev1) || defined(KEYBOARD_kyria_rev1) || defined(KEYBOARD_splitkb_kyria_rev1)
   #define ________MOD_LEFT_________ T_GUI, KC_LCTL, LT_RAI
   #define ________MOD_RIGHT________ LT_LOW, KC_BSPC, MT_DEL
 #else

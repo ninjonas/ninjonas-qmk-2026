@@ -4,19 +4,11 @@
 
 #if defined(OLED_ENABLE) && !defined(KEYBOARD_kyria_rev1)
 
-static uint32_t oled_timer = 0;
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (is_keyboard_master()) {
     return OLED_ROTATION_0;
   }
   return OLED_ROTATION_180;
-}
-
-bool process_record_oled(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        oled_timer = timer_read32();
-    }
-    return true;
 }
 
 void render_layout_state(void) {
@@ -89,14 +81,6 @@ static void render_logo(void) {
 }
 
 bool oled_task_user(void) {
-    if (timer_elapsed32(oled_timer) > 15000) {
-        oled_off();
-        return false;
-    }
-    #ifndef SPLIT_KEYBOARD
-    else { oled_on(); }
-    #endif
-
     if (is_keyboard_master()) {
         render_status();
     } else {

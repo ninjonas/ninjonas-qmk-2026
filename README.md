@@ -2,6 +2,58 @@
 
 This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the [main QMK repository](https://github.com/qmk/qmk_firmware). You must still fork the main QMK repository if writing firmware for a *new* keyboard.
 
+## Kyria Setup (ninjonas)
+
+This repo contains a working keymap for the **Splitkb Kyria rev1.2** with Pro Micro MCUs. If you're picking this up fresh, here's what you need to know.
+
+### Prerequisites
+
+1. **Install QMK CLI** via Homebrew:
+   ```bash
+   brew install qmk/qmk/qmk
+   qmk setup
+   ```
+
+2. **Install cross-compilers:**
+   ```bash
+   brew install avr-gcc@8 arm-none-eabi-gcc@8
+   ```
+
+3. **Fix the PATH** — avr-gcc@8 is keg-only, so Homebrew won't link it automatically. Add all four opt paths to your `~/.zshrc`:
+   ```bash
+   export PATH="/opt/homebrew/opt/avr-gcc@8/bin:$PATH"
+   export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+   export PATH="/opt/homebrew/opt/arm-none-eabi-gcc@8/bin:$PATH"
+   export PATH="/opt/homebrew/opt/avr-binutils/bin:$PATH"
+   ```
+   Then `source ~/.zshrc` (or open a new terminal).
+
+4. **Set the userspace overlay** from inside this repo's directory:
+   ```bash
+   qmk config user.overlay_dir="$(realpath .)"
+   ```
+
+### Compile
+
+```bash
+qmk compile -kb splitkb/kyria/rev1 -km ninjonas
+```
+
+Expected output: `28664/28672 bytes (99% full, ~8 bytes remaining)`. The firmware is tight but it fits.
+
+### Flash
+
+1. Run the flash command:
+   ```bash
+   qmk flash -kb splitkb/kyria/rev1 -km ninjonas
+   ```
+2. QMK will compile and then wait for a bootloader. **Double-tap the reset button** on the Pro Micro to enter DFU mode.
+3. Flash completes automatically. Repeat for the other half.
+
+**Note on Error 254:** If you see `make: [ERROR] Error 254` after flashing, ignore it. It's avrdude exiting with a non-zero code after a successful write. The firmware is on the board.
+
+**Firmware size note:** Stage 1 sits at 28,664 / 28,672 bytes (99% full, ~8 bytes free). Don't add features without removing something first.
+
 ## Howto configure your build targets
 
 1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.

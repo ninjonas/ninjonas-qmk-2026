@@ -44,7 +44,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Sends QMK make command to compile all keyboards
     case M_MALL:
      if (record->event.pressed) {
-        SEND_STRING("rm -f *.hex && rm -rf .build/ && make crkbd:ninjonas lily58:ninjonas hotdox:ninjonas pinky/3:ninjonas kyria:ninjonas\n");
+        SEND_STRING("make crkbd:ninjonas lily58:ninjonas hotdox:ninjonas pinky/3:ninjonas kyria:ninjonas\n");
       }
       break;
 
@@ -87,6 +87,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_SPACE) SS_UP(X_LGUI));
         wait_ms(250);
         SEND_STRING("terminal\n");
+      }
+      break;
+
+    // Opens macOS emoji picker (Ctrl + Cmd + Space)
+    case M_EMJI:
+      if (record->event.pressed) {
+        tap_code16(LCTL(LGUI(KC_SPC)));
       }
       break;
 
