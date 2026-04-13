@@ -22,6 +22,10 @@
 #ifdef TAP_DANCE_ENABLE
   #include "tap_dances.h"
 #endif
+
+#ifdef COMBO_ENABLE
+  extern combo_t key_combos[];
+#endif
 #if defined(KEYBOARD_lily58_rev1) && defined(PROTOCOL_LUFA)
   #include "lufa.h"
   #include "split_util.h"
@@ -100,16 +104,16 @@ uint16_t encoder_rotated_timer;
 #define _____________________ADJUST_L1______________________ M_MAKE, QK_CLEAR_EEPROM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #if defined(RGB_MATRIX_ENABLE) || defined(RGBLIGHT_ENABLE)
-  #define _____________________ADJUST_L2______________________ M_VRSN, M_MALL, RGB_SPI, RGB_SAI, RGB_HUI, RGB_VAI
-  #define _____________________ADJUST_L3______________________ M_FLSH, XXXXXXX, RGB_SPD, RGB_SAD, RGB_HUD, RGB_VAD
+  #define _____________________ADJUST_L2______________________ M_VRSN, M_MALL, UG_SPDU, UG_SATU, UG_HUEU, UG_VALU
+  #define _____________________ADJUST_L3______________________ M_FLSH, XXXXXXX, UG_SPDD, UG_SATD, UG_HUED, UG_VALD
 #else
   #define _____________________ADJUST_L2______________________ M_VRSN, M_MALL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
   #define _____________________ADJUST_L3______________________ M_FLSH, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #endif
 
 #if defined(RGB_MATRIX_ENABLE) || defined(RGBLIGHT_ENABLE)
-  #define _____________________ADJUST_R1______________________ RGB_TOG, XXXXXXX, XXXXXXX, COLEMAK,  DVORAK, QWERTY
-  #define _____________________ADJUST_R3______________________ RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  #define _____________________ADJUST_R1______________________ UG_TOGG, XXXXXXX, XXXXXXX, COLEMAK,  DVORAK, QWERTY
+  #define _____________________ADJUST_R3______________________ UG_NEXT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #else
   #define _____________________ADJUST_R1______________________ XXXXXXX, XXXXXXX, XXXXXXX, COLEMAK,  DVORAK, QWERTY
   #define _____________________ADJUST_R3______________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
