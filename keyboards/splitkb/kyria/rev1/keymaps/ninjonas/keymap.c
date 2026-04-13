@@ -109,6 +109,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 };
 
+// Combo definitions (callbacks implemented in users/ninjonas/combos.c)
+#ifdef COMBO_ENABLE
+enum combo_events {
+  EQ_QUIT,
+  RW_CLOSE,
+  QT_TAB,
+  ZC_COPY,
+  XV_PASTE
+};
+const uint16_t PROGMEM quit_combo[]  = {KC_E, KC_Q, COMBO_END};
+const uint16_t PROGMEM close_combo[] = {KC_R, KC_W, COMBO_END};
+const uint16_t PROGMEM tab_combo[]   = {KC_Q, KC_T, COMBO_END};
+const uint16_t PROGMEM copy_combo[]  = {KC_Z, KC_C, COMBO_END};
+const uint16_t PROGMEM paste_combo[] = {KC_X, KC_V, COMBO_END};
+combo_t key_combos[] = {
+  [EQ_QUIT]  = COMBO_ACTION(quit_combo),
+  [RW_CLOSE] = COMBO_ACTION(close_combo),
+  [QT_TAB]   = COMBO_ACTION(tab_combo),
+  [ZC_COPY]  = COMBO_ACTION(copy_combo),
+  [XV_PASTE] = COMBO_ACTION(paste_combo),
+};
+#endif
+
+// Tap dance definitions (callbacks implemented in users/ninjonas/tap_dances.c)
+#ifdef TAP_DANCE_ENABLE
+extern void copy_paste_app_finished(tap_dance_state_t *state, void *user_data);
+extern void copy_paste_app_reset(tap_dance_state_t *state, void *user_data);
+extern void y_numpad_finished(tap_dance_state_t *state, void *user_data);
+extern void y_numpad_reset(tap_dance_state_t *state, void *user_data);
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_ESC_CAPS]       = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+  [TD_LBRC_BACK]      = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, LGUI(KC_LBRC)),
+  [TD_RBRC_FWD]       = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, LGUI(KC_RBRC)),
+  [TD_TAB_CTRLTAB]    = ACTION_TAP_DANCE_DOUBLE(KC_TAB, LCTL(KC_TAB)),
+  [TD_GRV_CTRLGRV]    = ACTION_TAP_DANCE_DOUBLE(KC_GRV, LGUI(KC_GRV)),
+  [TD_GUI_GUISPC]     = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, LGUI(KC_SPC)),
+  [TD_COPY_PASTE_APP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, copy_paste_app_finished, copy_paste_app_reset),
+  [TD_Y_NUMPAD]       = ACTION_TAP_DANCE_FN_ADVANCED(NULL, y_numpad_finished, y_numpad_reset),
+};
+#endif
+
 // Stage 1: Encoder map (replaces encoder_update_user callback)
 // ENCODER_MAP_ENABLE = yes in rules.mk
 #ifdef ENCODER_MAP_ENABLE

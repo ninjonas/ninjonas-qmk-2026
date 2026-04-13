@@ -97,16 +97,3 @@ void y_numpad_reset (tap_dance_state_t *state, void *user_data) {
 // END: Y, NUMPAD
 
 //// END: Advanced Tap Dances
-
-tap_dance_action_t tap_dance_actions[] = {
-  [TD_ESC_CAPS]     = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
-  [TD_LBRC_BACK]    = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, LGUI(KC_LBRC)),
-  [TD_RBRC_FWD]     = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, LGUI(KC_RBRC)),
-  [TD_TAB_CTRLTAB]  = ACTION_TAP_DANCE_DOUBLE(KC_TAB, LCTL(KC_TAB)),
-  [TD_GRV_CTRLGRV]  = ACTION_TAP_DANCE_DOUBLE(KC_GRV, LGUI(KC_GRV)),
-  [TD_GUI_GUISPC]   = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, LGUI(KC_SPC)),
-
-  // Advanced Tap Dances
-  [TD_COPY_PASTE_APP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, copy_paste_app_finished, copy_paste_app_reset),
-  [TD_Y_NUMPAD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, y_numpad_finished, y_numpad_reset),
-};

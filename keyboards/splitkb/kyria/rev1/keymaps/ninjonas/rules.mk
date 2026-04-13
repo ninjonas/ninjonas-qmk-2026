@@ -5,5 +5,3 @@ LTO_ENABLE = yes               # Link Time Optimization (renamed from LINK_TIME_
 TRI_LAYER_ENABLE = yes         # Built-in tri-layer (replaces update_tri_layer_state in userspace)
 
 SRC += oled.c
-
-INTROSPECTION_KEYMAP_C = introspection.c

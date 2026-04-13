@@ -9,20 +9,6 @@ enum combo_events {
   XV_PASTE
 };
 
-const uint16_t PROGMEM quit_combo[] = {KC_E, KC_Q, COMBO_END};
-const uint16_t PROGMEM close_combo[] = {KC_R, KC_W, COMBO_END};
-const uint16_t PROGMEM tab_combo[] = {KC_Q, KC_T, COMBO_END};
-const uint16_t PROGMEM copy_combo[] = {KC_Z, KC_C, COMBO_END};
-const uint16_t PROGMEM paste_combo[] = {KC_X, KC_V, COMBO_END};
-
-combo_t key_combos[] = {
-  [EQ_QUIT] = COMBO_ACTION(quit_combo),
-  [RW_CLOSE] = COMBO_ACTION(close_combo),
-  [QT_TAB] = COMBO_ACTION(tab_combo),
-  [ZC_COPY] = COMBO_ACTION(copy_combo),
-  [XV_PASTE] = COMBO_ACTION(paste_combo),
-};
-
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
     case EQ_QUIT:
