@@ -1,5 +1,5 @@
 BOOTMAGIC_ENABLE = no       # Disable Boot Magic (https://beta.docs.qmk.fm/features/feature_bootmagic)
-MOUSEKEY_ENABLE = yes       # Mouse keys(+4700)
+MOUSEKEY_ENABLE = no        # Mouse keys — disabled to fit flash size
 EXTRAKEY_ENABLE = yes       # Audio control and System control(+450)
 TAP_DANCE_ENABLE = yes      # Enable Tap Dance.
 COMBO_ENABLE = yes          # Enable Combos
