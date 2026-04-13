@@ -35,5 +35,3 @@ enum custom_tapdances{
 #define T_GUI  TD(TD_GUI_GUISPC)  // Tap for Cmd, double tap for Cmd + Space
 #define T_CPAP TD(TD_COPY_PASTE_APP)  // Tap for paste, hold for copy, double tap for Line App
 #define T_Y    TD(TD_Y_NUMPAD)     // Tap for Y, double tap for NUMPAD
-
-extern tap_dance_action_t tap_dance_actions[];

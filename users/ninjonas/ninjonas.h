@@ -23,9 +23,6 @@
   #include "tap_dances.h"
 #endif
 
-#ifdef COMBO_ENABLE
-  extern combo_t key_combos[];
-#endif
 #if defined(KEYBOARD_lily58_rev1) && defined(PROTOCOL_LUFA)
   #include "lufa.h"
   #include "split_util.h"
