@@ -102,13 +102,13 @@ Double-tap `Y/NP` again to return to QWERTY.
 
 ### Encoders (Stage 1)
 
-| Layer  | Left encoder         | Right encoder         |
-|--------|----------------------|-----------------------|
-| QWERTY | Brightness down/up   | Volume down/up        |
-| LOWER  | App switcher (Cmd+Tab) | Scroll up/down      |
-| RAISE  | Page up/down         | Tab switcher (Ctrl+Tab) |
-| ADJUST | RGB hue              | RGB brightness        |
-| NUMPAD | (no action)          | (no action)           |
+| Layer  | Left encoder | Right encoder              |
+|--------|--------------|----------------------------|
+| QWERTY | (no action)  | Volume up/down (CCW=up)    |
+| LOWER  | (no action)  | (no action)                |
+| RAISE  | (no action)  | Brightness up/down (CCW=up)|
+| ADJUST | (no action)  | RGB brightness (CCW=up)    |
+| NUMPAD | (no action)  | (no action)                |
 
 ### OLED (Stage 1)
 
